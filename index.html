@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="OTIF Solutions">
+    <title>SweetSpot</title>
+    <link rel="shortcut icon" type="image/png" href="https://sweetspotdesserts.uk/assets/icons/icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link type="text/css" href="https://sweetspotdesserts.uk/css/main/app.css" rel="stylesheet">
+    <link type="text/css" href="fonts/icomoon/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://sweetspotdesserts.uk/css/toastr.min.css">
+	
+	
+	<!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+
+ <!-- aos css link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+
+    <style>
+        @media screen and (max-width: 991px) {
+            #item-dropdown {
+                right: 0 !important;
+                left: 16rem;
+            }
+        }
+
+        @media screen and (max-width: 648px) {
+            #item-dropdown {
+                left: 7rem;
+            }
+        }
+
+        @media screen and (max-width: 455px) {
+            #item-dropdown {
+                left: 0;
+            }
+        }
+
+        @media screen and (max-width: 347px) {
+            #cart {
+                font-size: 12px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .dropdown-item:focus,
+        .dropdown-item:hover {
+            color: white;
+            text-decoration: none;
+            background-color: #c54357;
+        }
+
+        .dropdown-items {
+            display: block;
+            width: 100%;
+            padding: .25rem 1.5rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .dropdown-items:hover {
+            color: black !important;
+            text-decoration: none !important;
+        }
+
+        .navbar .fa {
+            font-size: 25px;
+        }
+
+        .bg-nav-color {
+            background-color: #4f4a3e !important;
+        }
+
+        .navbar .navbar-brand {
+            position: absolute !important;
+            left: 8%;
+            z-index: 1;
+        }
+
+        .navbar-expand-lg .container-fluid {
+            flex-wrap: wrap !important;
+        }
+
+        nav.bg-danger .container .collapse ul li a.active {
+            background-color: #c54357 !important;
+            color: white !important;
+        }
+
+        nav.bg-danger .container .collapse ul li a:hover {
+            background-color: #c54357 !important;
+            color: white !important;
+        }
+
+        @media (min-width: 992px) {
+            body>footer>div>div>div.col-md-5.col-12.px-md-5>form>div>div.col-md-4.mt-3.mt-md-0>button>span {
+                font-size: 15px;
+            }
+        }
+
+        body {
+            position: relative;
+			font-family: "Montserrat", sans-serif;
+        }
+
+        #overlay {
+            position: fixed;
+            display: block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .loader-home {
+            position: fixed;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #C54357;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            /* Safari */
+            animation: spin 2s linear infinite;
+            left: 46%;
+            top: 46%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Safari */
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <link type="text/css" href="css/themes/components.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        @media screen and (max-width: 768px) {
+            .prev,
+            .next {
+                top: 70% !important;
+            }
+        }
+
+        element {}
+
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            list-style: none;
+            list-style: trad-chinese-informal;
+        }
+
+        a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .rating {
+            position: relative;
+            width: 1em;
+            font-size: 3vw;
+            color: #ff8f00;
+        }
+
+        .item img {
+            max-width: 100% !important;
+            width: 327px;
+            height: 327px;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .card.mx-4.h-50.item.cursor-pointer:hover {
+            transform: scale(1.1);
+            color: #dc3545 !important;
+        }
+
+        .mx-width {
+            max-width: 329px;
+        }
+
+        .mySlides {
+            display: none
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        /* Slideshow container */
+
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+        }
+
+        .fade:not(.show) {
+            opacity: 4;
+        }
+
+        /* Next & previous buttons */
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0rem !important;
+            user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+
+        .prev:hover,
+        .next:hover {
+            background-color: #c54357;
+        }
+
+        /* Caption text */
+
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active,
+        .dot:hover {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        /* On smaller screens, decrease text size */
+
+        @media only screen and (max-width: 300px) {
+            .prev,
+            .next,
+            .text {
+                font-size: 11px
+            }
+        }
+    </style>
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav class="navbar text-white bg-danger p-0 navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="col-12 p-0">
+                    <a class="navbar-brand" href="https://sweetspotdesserts.uk">
+                    <img width="100" src="https://sweetspotdesserts.uk/assets/images/logo.png" alt="SweetSpot" style="margin-left:-95px;">
+                </a>
+                    
+					
+					<div class="row justify-content-end p-3" style="opacity:0;">
+                        <div class="col-auto d-flex justify-content-center border-right-2 border-right">
+                            <a href="https://sweetspotdesserts.uk/login" class="text-light text-decoration-none"> <span class="fa fa-user"></span></a>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center border-right-2 border-right" style="color:#fff"><a href="https://www.instagram.com/sweetspotdessertuk/" target="_blank" class="text-light text-decoration-none" style="color:#fff;"> <span class="fa fa-instagram" style="color:#fff;"></span></a></div>
+
+                        <div class="col-auto d-flex justify-content-center pl-0" style="color:#fff"><a href="https://www.facebook.com/sweetspotdessertsuk/" style="color:#fff" target="_blank" class="text-light text-decoration-none"> <span class="fa fa-facebook-square" style="color:#fff"></span></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-lg-0">
+                <div class="row bg-nav-color">
+                    <div class="container">
+                        <div class="col-12">
+                            <div class="row">
+                                <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"><i class="fa fa-align-justify text-white"></i></span>
+                            </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav ml-auto text-white" style="margin-right:170px; margin-left:-270px;">
+                                        <li class="nav-item mx-4">
+                                            <a class="nav-link p-4 text-light active" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <!--<li class="nav-item mx-4">
+                                        <a class="nav-link p-4 text-light " href="https://sweetspotdesserts.uk/history">Our Journey</a>
+                                    </li>-->
+                                        <li class="nav-item mx-4">
+                                            <a class="nav-link p-4 text-light " href="franchises.html">Franchises</a>
+                                        </li>
+                                        <!--<li class="nav-item mx-4">
+                                        <a class="nav-link p-4 text-light "  href="#">Community</a>
+                                    </li>-->
+                                        <li class="nav-item mx-4">
+                                            <a class="nav-link p-4 text-light " href="branches.html">Branches</a>
+                                        </li>
+                                    </ul>
+                                </div>
+								<style>
+								nav.bg-danger .container .collapse ul li a.active {
+											background-color:transparent !important;
+											color: #fff !important;
+											font-weight:700;
+											}
+								</style>
+								
+								
+								<div class="row justify-content-end p-3">
+                        <div class="col-auto d-flex justify-content-center ">
+                            <a href="https://sweetspotdesserts.uk/login" class="text-light text-decoration-none"> <span class="fa fa-user"></span></a>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center " style="color:#fff"><a href="https://www.instagram.com/sweetspotdessertuk/" target="_blank" class="text-light text-decoration-none" style="color:#fff;"> <i class="fa fa-instagram" style="color:#fff;"></i></a></div>
+
+                        <div class="col-auto d-flex justify-content-center pl-0" style="color:#fff"><a href="https://www.facebook.com/sweetspotdessertsuk/" style="color:#fff" target="_blank" class="text-light text-decoration-none"> <i class="fa fa-facebook-square" style="color:#fff; margin-left:15px;"></i></a></div>
+                    </div>
+					
+					
+					
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="overlay">
+        <div class="loader-home"></div>
+    </div>
+    <img src="https://sweetspotdesserts.uk/images/items/6740fc1a1583313386dc98bfb7c63f12.png" alt="" width="100%" id="imageToAnimate">
+	<style>
+	#divToSticky{
+		width:650px;
+		height:626px;
+		background:#c24251;
+		position:absolute;
+		top:120px;
+		right:0;
+		display:flex; 
+		justify-content:center;
+		align-items:center;
+	}
+	#divToSticky h1{
+		color:#fff;
+		font-weight:600;
+		text-align:center;
+		margin-top:-140px;
+	}
+	
+	</style>
+	<div id="divToSticky"><h1><i>Make your Life sweeter <br>one bite at a time!</i></h1></div>
+	
+	
+	<style>
+
+#divToSticky {
+  position: absolute;
+  right: -100%;
+  transition: right 1s ease;
+}
+</style>
+<script>
+  window.addEventListener('load', function () {
+    const divToSticky = document.getElementById('divToSticky');
+
+  
+    // Animate the div from the right
+    divToSticky.style.right = '0';
+  });
+</script>
+
+    <footer>
+        <div class="container">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="card col-lg-5 shadow-sm" style="margin-top: -8rem;">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <h4 class="text-danger w-100 text-center">Process Your Order</h4>
+                                <p class="w-100 text-center">Find out nearest branch to your location</p>
+                                <div class="col-12">
+                                    <input class="mb-2 form-control subscribe-fields-shadow" id="postal_code" type="text" placeholder="Enter Post Code" value="">
+                                </div>
+                                <div class="pr-2">
+                                    <button type="button" class="btn btn-danger btn-lg btn-block border-radius-0 subscribe-btn" onclick="handleMode(3)">Delivery</button>
+                                </div>
+                                <div class="pr-2">
+                                    <button type="button" class="btn btn-danger btn-lg btn-block border-radius-0 subscribe-btn" onclick="handleMode(1)">Collection</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+	
+	
+	
+
+
+    <div class="section">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <b data-aos="zoom-in">
+                        Who doesn’t love to indulge in a delicious, freshly prepared dessert every now and again?
+                    </b>
+                    <p class="mt-3" data-aos="zoom-in">
+                        Whether it’s waffles, shakes, cookie dough or sundaes, we’ve got a mouth-watering selection for you. Eat-in or pick-up from your local <a href="/branches" style="color: #c24251" target="_blank">branch</a> or delivery, relax and
+                        we’ll come to you.
+                        <br><br> We are now also taking booking for birthdays, work dos and anniversaries. Contact your local <a href="/branches" style="color: #c24251" target="_blank">branch</a>
+                    </p>
+                </div>
+				
+				
+                <div class="col-12 text-center my-4">
+                    <h2 class="my-4" data-aos="zoom-in">Our Products</h2>
+                   <center><div class="lineOne" data-aos="zoom-in"></div></center>
+					
+				    <div class="product-section-wrap" data-aos="zoom-in">
+					
+                       
+						<div class="splitDiv splitDivOne">
+						
+						 <div class="product-section" data-aos="fade-right">
+						<div class="product-content">
+                            	   <div class="imgwrap"><img class="mb-4" src="./assets/icons/Waffles.png" alt="" style="width:80px;"></div>
+                         <div class="contentOfProdSec ">
+							
+							<h1>Waffles</h1>
+							<p class="headingText"><b>Delicious, golden waffles that melt in your mouth, perfect for any time of day.</b></p></p></p>
+							
+							</div>
+						
+						</div></div>
+						
+				
+						
+						<div class="product-section" data-aos="fade-right">
+						<div class="product-content">
+                            <div class="imgwrap"><img class="mb-4" src="./assets/icons/Cookie Doughs.png" style="width:80px;" alt=""></div>
+                            <div class="contentOfProdSec">
+							
+							<h1>Cookie Doughs</h1>
+							<p class="headingText"><b>Irresistible cookie dough treats that'll satisfy your sweet cravings.</b></p>
+							
+							</div>
+                        </div></div>
+				
+					
+						
+						 <div class="product-section" data-aos="fade-right">
+						<div class="product-content">
+                            <div class="imgwrap"><img class="mb-4" src="./assets/icons/Brownies.png" alt="" style="width:80px;"></div>
+                          <div class="contentOfProdSec">
+							
+							<h1>Brownies</h1>
+							<p class="headingText"><b>Rich, fudgy brownies that are pure chocolate bliss in every bite.</b></p>
+							
+							</div>
+							  
+                        </div></div>
+						
+						
+						
+				
+						<div class="product-section" data-aos="fade-right">
+						<div class="product-content">
+                            <div class="imgwrap"><img class="mb-4" src="./assets/icons/Cheesecakes.png" alt="" style="width:70px;"></div>
+                            <div class="contentOfProdSec">
+							
+							<h1>Cheesecakes</h1>
+							<p class="headingText"><b>Indulge in creamy, decadent cheesecakes that are a slice of heaven.</b></p>
+							
+							</div>
+                        </div></div>
+						
+				
+				
+						 <div class="product-section" data-aos="fade-right">
+						<div class="product-content">
+                           <div class="imgwrap"><img class="mb-4" src="./assets/icons/Shakes.png" alt="" style="width:40px;"></div>
+                           <div class="contentOfProdSec">
+							
+							<h1>Shakes</h1>
+							<p class="headingText"><b>Delicious shakes that are the perfect blend of flavor and refreshment.</b></p>
+							
+							</div>
+							  
+                        </div></div>
+						</div>
+				
+						<div class="splitDiv splitDivTwo">
+						
+				
+                        <div class="product-section" data-aos="fade-left">
+						<div class="product-content">
+                            <div class="imgwrap"><img class="mb-4" src="./assets/icons/Hot Drinks.png" alt="" style="width:50px;"></div>
+                            <div class="contentOfProdSec">
+							
+							<h1>Hot Drinks</h1>
+							<p class="headingText"><b>Warm up with our comforting hot drinks, a cozy sip of happiness.</b></p>
+							
+							</div>
+                        </div></div>
+						
+				
+						
+						
+                        <div class="product-section" data-aos="fade-left">
+						<div class="product-content">
+                           <div class="imgwrap"><img class="mb-4 " src="./assets/icons/Sundaes.png" alt="" style="width:40px;"></div>
+                          <div class="contentOfProdSec">
+							
+							<h1>Sundaes</h1>
+							<p class="headingText"><b>Irresistible sundaes that combine layers of flavors and textures for a sweet delight.</b></p>
+							
+							</div>
+							   
+                        </div></div>
+						
+						
+				
+				
+				
+                        <div class="product-section" data-aos="fade-left">
+						<div class="product-content">
+                            <div class="imgwrap"><img class="mb-4" src="./assets/icons/Cold Drinks.png" alt="" style="width:20px;"></div>
+                            <div class="contentOfProdSec">
+							
+							<h1>Cold Drinks</h1>
+							<p class="headingText"><b>Stay refreshed with our selection of chilled, thirst-quenching cold drinks.</b></p>
+							
+							</div>
+                        </div></div>
+						
+						
+				
+				
+                        <div class="product-section" data-aos="fade-left">
+						<div class="product-content">
+                            <div class="imgwrap"><img class="mb-4" src="./assets/icons/Sweets.png" alt="" style="width:50px;"></div>
+                         
+							<div class="contentOfProdSec">
+							
+							<h1>Sweets</h1>
+							<p class="headingText"><b>Discover a world of sweet treats that will satisfy your sweet tooth cravings.</b></p>
+							
+							</div>
+							   
+                        </div></div>
+						
+						
+				
+                        <div class="product-section" data-aos="fade-left">
+						<div class="product-content">
+                            <div class="imgwrap"><img class="mb-4" src="./assets/icons/Gelato Ice Creams.png" alt="" style="width:40px;"></div>
+                            <div class="contentOfProdSec">
+							
+							<h1>Gelato Ice Creams</h1>
+							<p class="headingText"><b>Indulge in the creamy goodness of our gelato ice creams, a taste of Italy in every scoop.</b></p>
+							
+							</div>
+                        </div></div>
+						</div>
+				
+						
+						
+                    </div>
+                </div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<style>
+					.product-section-wrap{
+						width:100%;
+						min-height:100vh;
+						display:flex;
+						justify-content:center;
+						align-items:center;
+				}
+				.splitDivOne{
+					margin-right:70px;
+				}
+			
+.product-section {
+    height: 30vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+	line-height:1.3;
+	letter-spacing:0px;
+}
+.product-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+	justify-content:center;
+	position:relative;
+}
+.product-content h1{
+	color:#c33a4d;
+	margin-bottom:10px;
+	font-size:22px;
+	font-weight:600;
+}
+.product-section img{
+	margin-right:35px;
+}
+
+				
+				.headingText b{
+					font-weight:300;
+					color:black;
+					font-size:17px;
+				}
+.contentOfProdSec{
+display: flex;
+    flex-direction: column;
+    align-items:left;
+    justify-content:center;
+    text-align: left;
+	
+}
+.lineOne{
+	width:240px;
+	height:3px;
+	color:#c33a4d;
+	background:#c33a4d;
+	border-radius:5px;
+}
+.lineOneTwo{
+	clear: both;   
+	width:400px;
+	height:1px;
+	border: 0;
+    background-image: linear-gradient(to right,rgba(0,0,0,0),rgba(0,0,0,.75),rgba(0,0,0,0));
+	
+}
+
+.serviceP{
+	background:#c24251;
+	width:100%;
+	color:#fff;
+	height:30px;
+	text-align:center;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	box-shadow:0 5px 10px rgba(0,0,0,0.2);
+}
+.serviceColumn{
+	padding:20px;
+	border:1px solid #c24251;
+	background:#fff;
+	box-shadow:0 5px 10px  #f7e3e4;
+	margin-right:40px;
+	padding-bottom:10px;
+	box-sizing: border-box;
+}
+</style>
+				
+				
+				
+				
+				
+				
+                <div class="col-12 text-center mt-4">
+                    <h2 class="my-4" data-aos="zoom-in">Our Services</h2>
+					    <center><div class="lineOne" data-aos="zoom-in"></div></center>
+
+                    <div class="row justify-content-center py-4" style="margin-top:30px;" >
+                       
+					   <div class="col-lg-2 col-md-4 col-6 serviceColumn" data-aos="fade-right">
+                            <img class="mb-4" src="./assets/icons/Quick Delivery.png" alt="" width="auto" height="auto">
+                            <p class="mt-4 serviceP" ><b>Quick Delivery</b></p>
+                        </div>  
+                        <div class="col-lg-2 col-md-4 col-6 serviceColumn" data-aos="zoom-in">
+                            <img class="mb-4" src="./assets/icons/Eat In.png" alt="" width="auto" height="auto">
+                            <p class="mt-4 serviceP"><b>Eat In</b></p>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 serviceColumn" data-aos="fade-left">
+                            <img class="mb-4" src="./assets/icons/Collection.png" alt="" width="auto" height="auto">
+                            <p class="mt-4 serviceP"><b>Collection</b></p>
+                        </div>
+                        
+                    </div>
+					
+					<div class="row justify-content-center py-4" style="margin-top:20px;" data-aos="zoom-in">
+                        <div class="col-lg-2 col-md-4 col-6 serviceColumn" data-aos="fade-right">
+                            <img class="mb-4" src="./assets/icons/Take Away.png" alt="" width="auto" height="auto">
+                            <p class="mt-4 serviceP"><b>Take Away</b></p>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 serviceColumn" data-aos="zoom-in">
+                            <img class="mb-4" src="./assets/icons/Party Bookings.png" alt="" width="auto" height="auto">
+                            <p class="mt-4 serviceP"><b>Party Bookings</b></p>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 serviceColumn" data-aos="fade-left">
+                            <img class="mb-4" src="./assets/icons/Free Wifi.png" alt="" width="auto" height="auto">
+                            <p class="mt-4 serviceP"><b>Free Wifi</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+	<style>
+	
+@media only screen and (max-width: 400px){
+	#divToSticky{
+		display:none;
+	}
+	.product-section-wrap{
+		flex-direction:column;
+	}
+	.splitDiv{
+		margin-left:10px;
+		
+	}
+	.splitDivOne{
+		margin-right:0px;
+		margin-top:30px;
+	}
+	.serviceColumn{
+		margin-bottom:15px;
+	}
+}
+</style>
+
+
+
+    <div class="section pt-0">
+        <div class="container">
+            <div class="col-12">
+                <img src="/assets/images/banner_secondary.jpg" alt="" width="100%">
+            </div>
+        </div>
+    </div>
+    <footer class="bg-footer pt-3">
+        <div class="container pt-4">
+            <div class="row text-white justify-content-between">
+                <div class="col-md-5 col-12 px-md-5">
+                    <p class="text-center text-md-left text-white"><b>Get weekly updates, Subscribe to our newsletter.</b></p>
+                    <form action="/subscribers" method="POST">
+                        <input type="hidden" name="_token" value="JDqy7t4MOlucfSATf5KYGWHmXAAqsLlj0uqTOSej">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 pr-md-0">
+                                <input class="form-control subscribe-fields-shadow" name="email" type="email" placeholder="Email Address">
+                            </div>
+                            <div class="col-md-4 mt-3 mt-md-0">
+                                <button type="submit" class="btn  btn-danger btn-lg btn-block border-radius-0 subscribe-btn p-0">
+                                <i class="d-lg-none d-md-block d-none fa fa-bell"></i>
+                                <span class="d-lg-block d-md-none d-block">Subscribe</span>
+                            </button>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="text-center text-md-left text-white mt-3">
+                        No Charge. Unsubscribe anytime
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p><b>Our Policies</b></p>
+                    <ul class="list-unstyled row">
+                        <li class="col-md-12 col-6"> <a class="text-light" href="/terms_of_use">Terms of Use</a></li>
+                        <li class="col-md-12 col-6"><a class="text-light" href="/privacy-policy">Privacy Policy</a></li>
+                        <li class="col-md-12 col-6"><a class="text-light" href="/terms_conditions">Terms & Conditions</a></li>
+                        <li class="col-md-12 col-6"> <a class="text-light" href="/allergy_information">Allergy Information	</a></li>
+                        <li class="col-md-12 col-6"> <a class="text-light" href="#">Unsubscribe</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <p class="mb-0"><b>Download</b></p>
+                    <div class="row">
+                        <a href="" class="col-md-12 col-6">
+                        <img src="https://sweetspotdesserts.uk/assets/images/app-store2.png" alt="" width="80%">
+                    </a>
+                        <a href="" class="col-md-12 col-6">
+                        <img src="https://sweetspotdesserts.uk/assets/images/googleplaystore.png" alt="" width="80%">
+                    </a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <p>Powered By</p>
+                    <div class="row">
+                        <img class="col-md-12 col-6" src="/assets/images/poweredSS.png" alt="" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="bg-danger text-white">
+        <div class="container">
+            <div class="row align-items-center justify-content-md-between justify-content-center">
+                <div class="col-md-auto col-12 order-md-1 order-2 text-center">
+                    <p class="mb-0">
+                        <span class="mr-2">©</span> All Rights Reserved. Developed by SweetSpot.
+                    </p>
+                </div>
+                <div class="col-auto order-md-2 order-1">
+                    <img src="/assets/images/visa.png" alt="" width="50px" height="auto">
+                    <img src="/assets/images/mastercard1.png" alt="" width="50px" height="auto">
+                    <img src="/assets/images/paypal.png" alt="" width="50px" height="auto">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="//cdnotif.b-cdn.net/js/gfs.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        feather.replace()
+    </script>
+    <script>
+        if (document.getElementById('cart_items'))
+            document.getElementById('cart_items').addEventListener('click', displayCart);
+
+        function displayCart() {
+            let page_url = window.location.pathname.substr(1);
+            if (page_url.substr(0, 7) === 'receipt') {
+                window.scrollTo(0, 500);
+                return;
+            }
+            if (document.getElementById('cart').classList.contains('show')) {
+                document.getElementById('cart').classList.remove('show');
+                return;
+            } else
+                document.getElementById('cart').classList.add('show');
+            let cart = localStorage.getItem('cart');
+            let div = '';
+            let div_cart = document.getElementById('cart');
+            if (cart && document.getElementById('cart').classList.contains('show')) {
+                cart = JSON.parse(cart);
+                if (div_cart.innerHTML) return;
+                div_cart.innerHTML = '';
+                if (Object.keys(cart).length) {
+                    for (let i in cart) {
+                        if (i !== 'delivery_fee' && i !== 'discount' && i !== 'subtotal' && i !== 'total') {
+                            let item = JSON.parse(cart[i]);
+                            let addons = item['addons'];
+                            div += "<a class=dropdown-items> <span><img src=" + '/images/items/' + item['image']['filename'] + " width='50px' height='50px'> </span> " + item['quantity'] + "x " + ((item['name'].length > 25) ? item['name'].substr(0, 24) + '....' : item['name']) + "</a>";
+                            div += "<div class='dropdown-divider'></div>";
+                        }
+                    }
+                    div += "<a onclick='viewCart()' class='cursor-pointer dropdown-item d-flex justify-content-center' > <i class='icon-shopping-cart mr-2'></i> View Details </a>";
+                    div_cart.innerHTML = div;
+                }
+            } else {
+                div = "<a class=dropdown-items> Your Cart is Empty </a>"
+                div += "<div class='dropdown-divider'></div><a onclick='viewCart()'  class='cursor-pointer dropdown-item d-flex justify-content-center' > Add Items  </a>"
+                div_cart.innerHTML = div;
+                let dropdown = document.getElementById('item-dropdown');
+                dropdown.style.left = 0;
+                dropdown.style.right = '9rem';
+            }
+        }
+
+        function viewCart() {
+            let page_url = window.location.pathname.substr(1);
+            if (page_url === 'menu' || page_url.substr(0, 8) === 'checkout' || page_url.substr(0, 7) === 'receipt') {
+                window.scrollTo(0, 500);
+            } else
+                window.location.href = '/menu';
+        }
+    </script>
+    <script>
+        $(window).on('load', function() {
+            if (window.location.pathname !== '/menu')
+                setTimeout(() => {
+                    $('#overlay').hide();
+                }, 500);
+        })
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        localStorage.removeItem('selected_service');
+        localStorage.removeItem('qrcheck');
+
+        function handleModeSelection() {
+            let selectedValue = document.getElementById('service_dine_in_id').value;
+            if (selectedValue == 2) {
+                document.getElementById("hide_table_number").style.display = "none";
+                document.getElementById("hide_table_number_heading").style.display = "none";
+                document.getElementById('table_number').value = 1
+            } else {
+                document.getElementById("hide_table_number").style.display = "block";
+                document.getElementById("hide_table_number_heading").style.display = "block";
+                document.getElementById('table_number').value = document.getElementById('table_number').value
+            }
+        }
+
+        function handleMode(serviceId) {
+            var postal_code = document.getElementById('postal_code').value;
+            if (postal_code) {
+                let name = 'Collection'
+                if (serviceId === 2)
+                    name = 'Take Away';
+                else if (serviceId === 3)
+                    name = 'Delivery';
+                $.ajax({
+                    url: "/api/find_location",
+                    type: 'POST',
+                    data: {
+                        '_token': $('meta[name="csrf-token"]').attr('content'),
+                        'address': postal_code,
+                        'service_name': name
+                    },
+                    error: function(response) {
+                        response = $.parseJSON(response.responseText);
+                        $.each(response, function(key, value) {
+                            console.log(value.error);
+                            toastr.error(value, 'Error');
+                        });
+                    },
+                    success: function(response) {
+                        if (response.selected_location) {
+                            //toastr.success(response.message);
+                            /*this.is_deliverable = true;
+                            this.selected_location = this.locations.find(location => response.data.selected_location.id == location.id);
+                            if(response.data.delivery_fee)
+                                this.delivery_fee = response.data.delivery_fee;*/
+                            localStorage.setItem('selected_location', JSON.stringify(response.selected_location));
+                            localStorage.setItem('post_code_response', JSON.stringify(response.post_code_response));
+                            localStorage.setItem('user_address', postal_code);
+                            localStorage.setItem('user_entered_address', postal_code);
+                            window.location.href = '/menu?service=' + serviceId;
+                        } else {
+                            //this.is_open = 0;
+                            toastr.error(response.location_message);
+                            //this.is_deliverable = false;
+                        }
+                    }
+                });
+
+                //  localStorage.setItem('user_entered_address',postal_code);
+                // window.location.href='/menu?service='+serviceId;
+            } else {
+                toastr.error('Please Enter Postal Code');
+            }
+
+        }
+
+        function handleModeDineIn(locationId, sourceId) {
+
+            var tableNumber = '';
+            var serviceId = '';
+            var bayNumber = '';
+
+            if (sourceId === 1) {
+                tableNumber = document.getElementById('table_number').value;
+                bayNumber = '-1';
+                serviceId = document.getElementById('service_dine_in_id').value;
+            } else {
+                bayNumber = document.getElementById('bay_number').value;
+                tableNumber = '-1';
+                serviceId = document.getElementById('service_id').value;
+            }
+
+            let name = '';
+
+            if (tableNumber > 0 || bayNumber > 0) {
+                if (sourceId === '1') {
+                    name = 'DineIn';
+                } else if (sourceId === '2' && serviceId === '4') {
+                    name = 'DineIn';
+                } else {
+                    name = 'Collection';
+                }
+
+                $.ajax({
+                    url: "/api/find_location_using_qrcode",
+                    type: 'POST',
+                    data: {
+                        '_token': $('meta[name="csrf-token"]').attr('content'),
+                        'table_number': tableNumber,
+                        'service_name': name,
+                        'service_id': serviceId,
+                        'location_id': locationId,
+                        'sourceId': sourceId,
+                        'bayNumber': bayNumber
+                    },
+                    error: function(response) {
+                        response = $.parseJSON(response.responseText);
+                        $.each(response, function(key, value) {
+                            console.log(value.error);
+                            toastr.error(value, 'Error');
+                        });
+                    },
+                    success: function(response) {
+                        if (response.selected_location) {
+                            localStorage.setItem('selected_location', JSON.stringify(response.selected_location));
+                            localStorage.setItem('selected_service', serviceId);
+                            localStorage.setItem('qrcheck', true);
+                            window.location.href = '/menu?location_id=' + locationId + '&source_id=' + sourceId + '&table_number=' + tableNumber + '&bay_number=' + bayNumber + '&service=' + serviceId;
+                        } else {
+                            toastr.error(response.location_message);
+                        }
+                    }
+                });
+            } else {
+                if (sourceId === '1')
+                    toastr.error('Please Select Table');
+                else
+                    toastr.error('Please Select Bay Number');
+            }
+        }
+
+        function showDineIn(select) {
+            if (select.value == 4) {
+                document.getElementById('dineIn_div').style.display = "block";
+            } else {
+                document.getElementById('dineIn_div').style.display = "none";
+            }
+        }
+    </script>
+	
+	
+	
+<!-- aos js link  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script>
+
+   AOS.init({
+      duration:800,
+      delay:300
+   });
+
+</script>
+
+</body>
+
+</html>

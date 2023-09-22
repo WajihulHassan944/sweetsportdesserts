@@ -1,0 +1,1388 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="OTIF Solutions">
+<title>SweetSpot</title>
+<link rel="shortcut icon" type="image/png" href="https://sweetspotdesserts.uk/assets/icons/icon.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link type="text/css" href="https://sweetspotdesserts.uk/css/main/app.css" rel="stylesheet">
+<link type="text/css" href="https://sweetspotdesserts.uk/fonts/icomoon/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://sweetspotdesserts.uk/css/toastr.min.css">
+<style>
+    @media  screen and (max-width: 991px) {
+        #item-dropdown {
+            right: 0 !important;
+            left: 16rem;
+        }
+    }@media  screen and (max-width: 648px) {
+        #item-dropdown {
+            left: 7rem;
+        }
+    }@media  screen and (max-width: 455px) {
+        #item-dropdown {
+            left: 0;
+        }
+    }@media  screen and (max-width: 347px) {
+        #cart {
+            font-size: 12px;
+        }
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    .dropdown-item:focus, .dropdown-item:hover {
+        color: white;
+        text-decoration: none;
+        background-color: #c54357;
+    }
+    .dropdown-items {
+        display: block;
+        width: 100%;
+        padding: .25rem 1.5rem;
+        clear: both;
+        font-weight: 400;
+        color: #212529;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+    }
+    .dropdown-items:hover{
+        color: black !important;
+        text-decoration: none !important;
+    }
+    .navbar .fa {
+        font-size: 25px;
+    }
+    .bg-nav-color {
+        background-color: #4f4a3e !important;
+    }
+    .navbar .navbar-brand{
+        position: absolute !important;
+        left: 8%;
+        z-index: 1;
+    }
+    .navbar-expand-lg .container-fluid{
+        flex-wrap: wrap !important;
+    }
+    nav.bg-danger .container .collapse ul li a.active{
+        background-color: #c54357 !important;
+        color: white !important;
+    }
+    nav.bg-danger .container .collapse ul li a:hover{
+        background-color: #c54357 !important;
+        color: white !important;
+    }
+    @media (min-width: 992px){
+        body > footer > div > div > div.col-md-5.col-12.px-md-5 > form > div > div.col-md-4.mt-3.mt-md-0 > button > span{
+            font-size: 15px;
+        }
+    }
+        body {
+            position: relative;
+			font-family: "Montserrat", sans-serif;
+        }
+
+    #overlay {
+        position: fixed;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 2;
+        cursor: pointer;
+    }
+    .loader-home {
+        position: fixed;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #C54357;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        left: 46%;
+        top: 46%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes  spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link type="text/css" href="https://sweetspotdesserts.uk/css/themes/components.css" rel="stylesheet">
+    <link type="text/css" href="https://sweetspotdesserts.uk/css/slider.css" rel="stylesheet">
+    <style>
+        #cakes-footer{
+            margin-top: 0 !important;
+        }
+        .btn-custom{
+            background-color: white;
+            color: #a2847e;
+            border-radius: 0.6rem !important;
+        }
+        input, textarea {
+            color: #a2847e !important;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .bg-danger-plus {
+            background-color: #9a3440;
+            border-radius: 1rem;
+        }
+        .form-control{
+            border-radius: 0.7rem;
+            height: 3rem;
+        }
+        .bg-header{
+            color: #4f4a3e !important;
+            font-size: 36px !important;
+        }
+        p{
+            font-size: 16px !important;
+        }
+        .border-radius-0{
+            border-radius: 0rem;
+        }
+       .col-md-6 ul {
+            list-style: none;
+        }
+       .bg-sami-dark {
+           background-color: #4f4a3e;
+       }
+       .px-auto {
+           padding-left: 5rem !important;
+           padding-right: 5rem !important;
+       }
+
+       .col-md-6 ul li::before {
+            content: "\2022";
+            color: #c82333;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        .col-md-6 ul li {
+            font-size: 1rem;
+        }
+        * {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        html, body, .wrapper {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: sans-serif;
+            color: #4d4d4d;
+            background: #eee;
+        }
+
+        .top-title {
+            margin-bottom: 15px;
+            color: #D72A5E;
+        }
+
+        .text-wrapper {
+            text-align: center;
+        }
+
+        .button {
+            top: 50%;
+            transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            position: absolute;
+            cursor: pointer;
+            z-index: 100;
+            border: 2px solid #D72A5E;
+            border-radius: 50px;
+            padding: 10px;
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            -webkit-justify-content: center;
+            align-items: center;
+            -webkit-align-items: center;
+            transition: 180ms ease-in-out;
+        }
+        .button:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .button .material-icons {
+            color: #D72A5E;
+        }
+        .button#button-right {
+            right: 0;
+        }
+        .button#button-left {
+            left: 0;
+        }
+
+        .no-select {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .wrapper {
+            padding: 30px;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 90%;
+            margin: 0 auto;
+            max-width: calc(3 * 520px);
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: row;
+            -webkit-flex-direction: row;
+            padding: 30px 0;
+        }
+        .slider img {
+            display: none;
+            height: auto;
+            transition: all 400ms ease-in-out;
+            -webkit-transition: all 400ms ease-in-out;
+            position: relative;
+            max-width: calc(100% / 3);
+            min-width: 30px;
+            align-self: center;
+            -webkit-align-self: center;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+        .slider img:nth-child(1) {
+            -webkit-transform: perspective(900px) rotateY(-90deg) scale(0.6);
+            transform: perspective(900px) rotateY(-90deg) scale(0.6);
+            display: block;
+            position: absolute;
+            left: 0;
+            z-index: 10;
+        }
+        .slider img:nth-child(2) {
+            -webkit-transform: perspective(900px) rotateY(-60deg) scale(0.8);
+            transform: perspective(900px) rotateY(-60deg) scale(0.8);
+            display: block;
+            left: 0;
+            z-index: 20;
+        }
+        .slider img:nth-child(3) {
+            display: block;
+            z-index: 30;
+        }
+        .slider img:nth-child(4) {
+            -webkit-transform: perspective(900px) rotateY(60deg) scale(0.8);
+            transform: perspective(900px) rotateY(60deg) scale(0.8);
+            display: block;
+            right: 0;
+            z-index: 20;
+        }
+        .slider img:nth-child(5) {
+            -webkit-transform: perspective(900px) rotateY(90deg) scale(0.6);
+            transform: perspective(900px) rotateY(90deg) scale(0.6);
+            display: block;
+            position: absolute;
+            right: 0;
+            z-index: 10;
+        }
+        .slider img.left:nth-child(1) {
+            -webkit-animation: leftNone 400ms ease-in-out;
+            animation: leftNone 400ms ease-in-out;
+        }
+        .slider img.left:nth-child(2) {
+            -webkit-animation: middleLeft 400ms ease-in-out;
+            animation: middleLeft 400ms ease-in-out;
+        }
+        .slider img.left:nth-child(3) {
+            -webkit-animation: rightMiddle 400ms ease-in-out;
+            animation: rightMiddle 400ms ease-in-out;
+        }
+        .slider img.right:nth-child(3) {
+            -webkit-animation: leftMiddle 400ms ease-in-out;
+            animation: leftMiddle 400ms ease-in-out;
+        }
+        .slider img.right:nth-child(4) {
+            -webkit-animation: middleRight 400ms ease-in-out;
+            animation: middleRight 400ms ease-in-out;
+        }
+        .slider img.right:nth-child(5) {
+            -webkit-animation: rightNone 400ms ease-in-out;
+            animation: rightNone 400ms ease-in-out;
+        }
+
+        @keyframes  middleLeft {
+            0% {
+                transform: perspective(0) rotateY(0) scale(1);
+                left: calc(100% / 3);
+            }
+            100% {
+                transform: perspective(900px) rotateY(-60deg) scale(0.8);
+                left: 0;
+            }
+        }
+        @keyframes  rightMiddle {
+            0% {
+                transform: perspective(900px) rotateY(60deg) scale(0.8);
+                left: calc(100% / 3);
+            }
+            100% {
+                transform: perspective(0) rotateY(0) scale(1);
+                left: 0;
+            }
+        }
+        @keyframes  leftNone {
+            0% {
+                transform: perspective(900px) rotateY(-60deg) scale(0.8);
+            }
+            100% {
+                transform: perspective(900px) rotateY(-90deg) scale(0.6);
+            }
+        }
+        @-webkit-keyframes middleLeft {
+            0% {
+                -webkit-transform: perspective(0) rotateY(0) scale(1);
+                left: calc(100% / 3);
+            }
+            100% {
+                -webkit-transform: perspective(900px) rotateY(-60deg) scale(0.8);
+                left: 0;
+            }
+        }
+        @-webkit-keyframes rightMiddle {
+            0% {
+                -webkit-transform: perspective(900px) rotateY(60deg) scale(0.8);
+                left: calc(100% / 3);
+            }
+            100% {
+                -webkit-transform: perspective(0) rotateY(0) scale(1);
+                left: 0;
+            }
+        }
+        @-webkit-keyframes leftNone {
+            0% {
+                -webkit-transform: perspective(900px) rotateY(-60deg) scale(0.8);
+            }
+            100% {
+                -webkit-transform: perspective(900px) rotateY(-90deg) scale(0.6);
+            }
+        }
+        @keyframes  middleRight {
+            0% {
+                transform: perspective(0) rotateY(0) scale(1);
+                right: calc(100% / 3);
+            }
+            100% {
+                transform: perspective(900px) rotateY(60deg) scale(0.8);
+                right: 0;
+            }
+        }
+        @keyframes  leftMiddle {
+            0% {
+                transform: perspective(900px) rotateY(-60deg) scale(0.8);
+                right: calc(100% / 3);
+            }
+            100% {
+                transform: perspective(0) rotateY(0) scale(1);
+                right: 0;
+            }
+        }
+        @keyframes  rightNone {
+            0% {
+                transform: perspective(900px) rotateY(60deg) scale(0.8);
+            }
+            100% {
+                transform: perspective(900px) rotateY(90deg) scale(0.6);
+            }
+        }
+        @keyframes  noneRight {
+            0% {
+                transform: perspective(900px) rotateY(90deg) scale(0.6);
+            }
+            100% {
+                transform: perspective(900px) rotateY(60deg) scale(0.8);
+            }
+        }
+        @-webkit-keyframes middleRight {
+            0% {
+                -webkit-transform: perspective(0) rotateY(0) scale(1);
+                right: calc(100% / 3);
+            }
+            100% {
+                -webkit-transform: perspective(900px) rotateY(60deg) scale(0.8);
+                right: 0;
+            }
+        }
+        @-webkit-keyframes leftMiddle {
+            0% {
+                -webkit-transform: perspective(900px) rotateY(-60deg) scale(0.8);
+                right: calc(100% / 3);
+            }
+            100% {
+                -webkit-transform: perspective(0) rotateY(0) scale(1);
+                right: 0;
+            }
+        }
+        @-webkit-keyframes rightNone {
+            0% {
+                -webkit-transform: perspective(900px) rotateY(60deg) scale(0.8);
+            }
+            100% {
+                -webkit-transform: perspective(900px) rotateY(90deg) scale(0.6);
+            }
+        }
+        @-webkit-keyframes noneRight {
+            0% {
+                -webkit-transform: perspective(900px) rotateY(90deg) scale(0.6);
+            }
+            100% {
+                -webkit-transform: perspective(900px) rotateY(60deg) scale(0.8);
+            }
+        }
+            .top-left-1 {
+                position: absolute;
+                top: 203px;
+                left: -254px;
+                font-weight: bold;
+                transform: rotate(-90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 25px;
+            }
+            .top-left-1 .content {
+                transform: scaleX(-1);
+            }
+            .top-right-1 {
+                position: absolute;
+                top: 74px;
+                left: -250px;
+                font-weight: bold;
+                transform: rotate(90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 20px;
+            }
+            .top-right-1 .content {
+                transform: scaleX(-1);
+            }
+            .top-bottom-1{
+                position: absolute;
+                top: 386px;
+                left: 47px;
+                font-size: 25px;
+            }
+
+
+
+            .top-left-2 {
+                position: absolute;
+                top: 544px;
+                left: -108px;
+                font-weight: bold;
+                transform: rotate(-90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 25px;
+            }
+            .top-left-2 .content {
+                transform: scaleX(-1);
+            }
+            .top-right-2 {
+                position: absolute;
+                top: 409px;
+                left: -63px;
+                font-weight: bold;
+                transform: rotate(90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 20px;
+            }
+            .top-right-2 .content {
+                transform: scaleX(-1);
+            }
+            .top-bottom-2{
+                position: absolute;
+                top: 163px;
+                left: 242px;
+                font-size: 25px;
+            }
+
+
+
+            .top-left-3 {
+                position: absolute;
+                top: 200px;
+                left: 83px;
+                font-weight: bold;
+                transform: rotate(-90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 25px;
+            }
+            .top-left-3 .content {
+                transform: scaleX(-1);
+            }
+            .top-right-3 {
+                position: absolute;
+                top: 76px;
+                left: 130px;
+                font-weight: bold;
+                transform: rotate(90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 20px;
+            }
+            .top-right-3 .content {
+                transform: scaleX(-1);
+            }
+            .top-bottom-3{
+                position: absolute;
+                top: 387px;
+                left: 432px;
+                font-size: 25px;
+            }
+
+
+            .top-left-4 {
+                position: absolute;
+                top: 543px;
+                left: 270px;
+                font-weight: bold;
+                transform: rotate(-90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 25px;
+            }
+            .top-left-4 .content {
+                transform: scaleX(-1);
+            }
+            .top-right-4 {
+                position: absolute;
+                top: 410px;
+                left: 321px;
+                font-weight: bold;
+                transform: rotate(90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 20px;
+            }
+            .top-right-4 .content {
+                transform: scaleX(-1);
+            }
+            .top-bottom-4{
+                position: absolute;
+                top: 162px;
+                left: 627px;
+                font-size: 25px;
+            }
+
+
+            .top-left-5 {
+                position: absolute;
+                top: 203px;
+                left: 465px;
+                font-weight: bold;
+                transform: rotate(-90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 25px;
+            }
+            .top-left-5 .content {
+                transform: scaleX(-1);
+            }
+            .top-right-5 {
+                position: absolute;
+                top: 76px;
+                left: 507px;
+                font-weight: bold;
+                transform: rotate(90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 20px;
+            }
+            .top-right-5 .content {
+                transform: scaleX(-1);
+            }
+            .top-bottom-5{
+                position: absolute;
+                top: 387px;
+                left: 812px;
+                font-size: 25px;
+            }
+
+
+
+            .top-left-6 {
+                position: absolute;
+                top: 542px;
+                left: 650px;
+                font-weight: bold;
+                transform: rotate(-90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 25px;
+            }
+            .top-left-6 .content {
+                transform: scaleX(-1);
+            }
+            .top-right-6 {
+                position: absolute;
+                top: 410px;
+                left: 695px;
+                font-weight: bold;
+                transform: rotate(90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 20px;
+            }
+            .top-right-6 .content {
+                transform: scaleX(-1);
+            }
+            .top-bottom-6{
+                position: absolute;
+                top: 164px;
+                left: 1001px;
+                font-size: 25px;
+            }
+
+
+
+            .top-left-7 {
+                position: absolute;
+                top: 203px;
+                left: 841px;
+                font-weight: bold;
+                transform: rotate(-90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 25px;
+            }
+            .top-left-7 .content {
+                transform: scaleX(-1);
+            }
+            .top-right-7 {
+                position: absolute;
+                top: 76px;
+                left: 882px;
+                font-weight: bold;
+                transform: rotate(90deg) scaleX(-1);
+                transform-origin: top right;
+                font-size: 20px;
+            }
+            .top-right-7 .content {
+                transform: scaleX(-1);
+            }
+            .top-bottom-7{
+                position: absolute;
+                top: 388px;
+                left: 1199px;
+                font-size: 25px;
+            }
+            .test-background{
+                background-image: url('/assets/finalCircle.png');
+                background-repeat: no-repeat;
+                /*border-style: solid;*/
+                max-width: 1403px;
+                height: 670px;
+                border-width: 1px;
+                overflow: hidden;
+                position: relative;
+                width: 100%;
+            }
+            .price-width{
+                width: 124px;
+            }
+            .name-width{
+                width: 136px;
+            }
+            #more {display: none;}
+            #more1 {display: none;}
+            #more2 {display: none;}
+            #moreWhy {display: none;}
+    </style>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <nav class="navbar text-white bg-danger p-0 navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="col-12 p-0">
+                    <a class="navbar-brand" href="https://sweetspotdesserts.uk">
+                    <img width="100" src="https://sweetspotdesserts.uk/assets/images/logo.png" alt="SweetSpot" style="margin-left:-95px;">
+                </a>
+                    
+					
+					<div class="row justify-content-end p-3" style="opacity:0;">
+                        <div class="col-auto d-flex justify-content-center border-right-2 border-right">
+                            <a href="https://sweetspotdesserts.uk/login" class="text-light text-decoration-none"> <span class="fa fa-user"></span></a>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center border-right-2 border-right" style="color:#fff"><a href="https://www.instagram.com/sweetspotdessertuk/" target="_blank" class="text-light text-decoration-none" style="color:#fff;"> <span class="fa fa-instagram" style="color:#fff;"></span></a></div>
+
+                        <div class="col-auto d-flex justify-content-center pl-0" style="color:#fff"><a href="https://www.facebook.com/sweetspotdessertsuk/" style="color:#fff" target="_blank" class="text-light text-decoration-none"> <span class="fa fa-facebook-square" style="color:#fff"></span></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-lg-0">
+                <div class="row bg-nav-color">
+                    <div class="container">
+                        <div class="col-12">
+                            <div class="row">
+                                <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"><i class="fa fa-align-justify text-white"></i></span>
+                            </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav ml-auto text-white" style="margin-right:170px; margin-left:-270px;">
+                                        <li class="nav-item mx-4">
+                                            <a class="nav-link p-4 text-light" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <!--<li class="nav-item mx-4">
+                                        <a class="nav-link p-4 text-light " href="https://sweetspotdesserts.uk/history">Our Journey</a>
+                                    </li>-->
+                                        <li class="nav-item mx-4">
+                                            <a class="nav-link p-4 text-light active" href="franchises.html">Franchises</a>
+                                        </li>
+                                        <!--<li class="nav-item mx-4">
+                                        <a class="nav-link p-4 text-light "  href="#">Community</a>
+                                    </li>-->
+                                        <li class="nav-item mx-4">
+                                            <a class="nav-link p-4 text-light " href="branches.html">Branches</a>
+                                        </li>
+                                    </ul>
+                                </div>
+								<style>
+								nav.bg-danger .container .collapse ul li a.active {
+											background-color:transparent !important;
+											color: #fff !important;
+											font-weight:700;
+											}
+								</style>
+								
+								
+								<div class="row justify-content-end p-3">
+                        <div class="col-auto d-flex justify-content-center ">
+                            <a href="https://sweetspotdesserts.uk/login" class="text-light text-decoration-none"> <span class="fa fa-user"></span></a>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center " style="color:#fff"><a href="https://www.instagram.com/sweetspotdessertuk/" target="_blank" class="text-light text-decoration-none" style="color:#fff;"> <i class="fa fa-instagram" style="color:#fff;"></i></a></div>
+
+                        <div class="col-auto d-flex justify-content-center pl-0" style="color:#fff"><a href="https://www.facebook.com/sweetspotdessertsuk/" style="color:#fff" target="_blank" class="text-light text-decoration-none"> <i class="fa fa-facebook-square" style="color:#fff; margin-left:15px;"></i></a></div>
+                    </div>
+					
+					
+					
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+            
+<img src="https://sweetspotdesserts.uk/assets/images/banner_franchise.jpg" alt="" width="100%">
+    <div class="section bg-white pt-0">
+        <div class="container-fluid">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 text-center pl-5">
+                    <h2 class="text-bold-700 bg-header">Franchise Relationship</h2>
+                    <p>
+                        Sweet Spot are now expanding, and we have a variety of new franchise opportunities right now in several locations. If you want to join with us as we
+                        continue our expansion across the uk, we would like to hear from you. There can be no denying it: British people always find room for dessert. Interestingly
+                        the demand for desserts is on the increase with everything from milkshakes to New York cheesecakes on the menu for sweet toothed Britains.
+                    </p>
+                    <p class="mt-2">
+                        For Detailed Explaination See Our brochure
+                    </p>
+                    <a href="https://sweetspotdesserts.uk/assets/SweetSpot_Brochure.pdf" type="button" class="btn btn-danger btn-lg border-radius-0 subscribe-btn mt-3 shadow radius-none" style="background-color: #c34352" target="_blank">Franchise Brochure</a>
+                </div>
+                <div class="col-md-6 pr-0 mt-5 mt-md-0">
+                    <img src="https://sweetspotdesserts.uk/assets/images/relationship.png" alt="" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="section bg-white">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 text-center">
+                <img src="https://sweetspotdesserts.uk/assets/images/laptop.png" alt="" width="100%">
+            </div>
+            <div class="col-md-6 px-5 mt-5 mt-md-0">
+                <h2 class="text-bold-700 bg-header">Our Own Website &
+                    Web Based POS System</h2>
+                <ul>
+                    <li>We have built our own in house POS system and Website. (Mobile
+                        App is under construction).</li>
+                    <li>All of our ordering platforms (Website, Just Eat, Uber Eats, Deliveroo
+                        etc.) are managed on one screen platform.
+                    </li>
+                    <li>One Website for all of our stores accross the world. </li>
+                    <li>Loyalty Point System (When customer is ordering online).</li>
+                    <li>Customized Promotions & Popular sales suggestion.</li>
+                    <li>Alerts through Emails & SMS for new promotions & deals.</li>
+                    <li>One point of calling system for all of our stores (For Ordering, Order
+                        Query & other customer services).</li>
+                    <li>Order through QR Code for Takeaway or Eat-In to earn loyalty points.</li>
+                    <li>Inventory Management System.</li>
+                    <li>Live Sales Monitoring System.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section bg-sami-dark text-white">
+    <div class="container-fluid px-auto">
+        <h2 class="text-bold-700 text-center text-white py-5">Why Choose Sweet Spot? </h2>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 px-5">
+                <img src="https://sweetspotdesserts.uk/assets/images/lights.png" alt="" width="100%">
+            </div>
+            <div class="col-md-6 px-5 mt-5 mt-md-0">
+                <p>
+                    At Sweet Spot, we're fanatical about ensuring we deliver the highest quality desserts for our customers, whilst our business model is driven by the philosophy that the dessert shouldn't cost more than the meal! This, coupled with our family friendly, casual branch decor, ensures that Sweet Spot is accessible to
+                    a wide target audience through an affordable menu and a warm, welcoming atmosphere.<span id="dotsWhy">..</span><span id="moreWhy"><br><br><strong>More About Us</strong><br>
+                    Sweet Spot Retail Limited was established in 2018, as a premium dessert café, focusing solely on providing a variety of sweet goods. The brand’s concept is focused on providing a stylish, friendly and vibrant environment, creating an atmosphere of extravagance and indulgence. We intend to serve all types of clients and even cater for events.
+                    As well as providing in-store dining space where customers can enjoy freshly prepared waffles, cakes, Brownies, Cookie Dough’s and more, all of our franchises also offer delivery options, expanding their reach over a wider area.
+                    With continually developing menus, we have everything for everyone’s taste buds, Sweet Spot has created a successful business model that stands out from other dessert brands, and provides an attractive business opportunity for interested franchisees.
+                    <br><br><strong>Head Office?</strong><br>
+                    The head offices and the root foundation of the organisation trades from Far Gosford Street branch in Coventry.
+                    <br><br><strong>How much does a franchise cost?</strong><br>
+                    Sweet Spot offers a range of different options to start a business with the brand, including a Virtual Kitchen, kiosk, and Café / Restaurant package. All franchisees must pay a initial franchise fee which covers the cost of using the brand logo, training in store and at franchisee location. In addition to this, each franchise package will vary in cost, due to the differences in shop/site construction costs, and the investment required for equipment.
+                    The Virtual Kitchen package is the lowest price option, requiring an investment of approximately £20,000- £30,000 in total. 
+                    A Kiosk package is our medium investment and requires a total investment of £30,000 - £50,000, while to start a Cafe / Restaurant, franchise owners can expect to invest approximately £100,000 - £130,000 in total.
+                    All investments are approximate costs as it all depends on size and machinery choices by the franchisee,
+                    In addition to the initial investment costs, franchise owners are also required to pay ongoing fees, which include a monthly management fee of 5 per cent and a 1 per cent marketing fee. Both are based on gross turnover.
+                    <br><br><strong>Finding and securing your Territory!</strong></br>
+                    Territories are available across the UK and abroad. For information about current franchise opportunities, contact the brand directly. Franchisees may open more than one store, after demonstrating a consistent level of growth and success with an initial outlet. 
+                    What sort of experience should you have to start a franchise business?
+                    While it is not essential to have previous experience in the food industry before starting a franchise with Sweet Spot, it will be helpful if you are intending to open a Kiosk, café or restaurant franchise with the brand, as the ability to demonstrate good management abilities in this sector will be essential. Full training is provided to ensure owners can successfully manage and run the franchise , but a good sense of business acumen, direction and leadership skills is desired regardless of experience or background, is essential.
+                    <br><br><strong>Success & Vision</strong><br>
+                    We have a tried and tested menu, ingredients and a vision for success meaning our franchisee’s all fully focused on the site itself. 
+                    We will help you throughout your contract with all aspects including events and promotions.</span>
+                </p>
+                <div class="d-flex justify-content-center">
+                    <button type="button" onclick="myFunctionWhy()" id="myBtnWhy" class="btn btn-danger btn-lg border-radius-0 subscribe-btn mt-3 shadow radius-none d-flex justify-content-center">Read More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="text-center py-5">
+        <h2 class="text-bold-700 bg-header">Data Behind the Success</h2>
+        <p>
+            Number of Units Sold Across all Sweet Spot Stores
+        </p>
+    </div>
+    <div class="container-fluid row justify-content-center">
+        <div class="test-background">
+        <div class='label top-right-1'>
+            <div class='content name-width font-weight-bold'>CHEESECAKE</div>
+        </div>
+        <div class='label top-left-1'>
+            <div style="width: 80px" class='content font-weight-bold text-danger text-bold-700'>£0.00</div>
+        </div>
+        <div class="text-danger text-danger ml-4 mt-2 text-center top-bottom-1">
+            <b>
+                0.00
+            </b>
+            <p>
+                SLICES
+            </p>
+        </div>
+
+        <div class='label top-right-2'>
+            <div class='content name-width font-weight-bold'>COOKIE&nbsp;DOUGH</div>
+        </div>
+        <div class='label top-left-2'>
+            <div class='content price-width font-weight-bold text-danger text-bold-700'>£37,855.75</div>
+        </div>
+        <div class="text-danger text-danger ml-4 mt-2 text-center top-bottom-2">
+            <b>
+                7,949.00
+            </b>
+            <p>
+                SLICES
+            </p>
+        </div>
+
+        <div class='label top-right-3'>
+            <div class='content name-width font-weight-bold'> WAFFLES </div>
+        </div>
+        <div class='label top-left-3'>
+            <div class='content price-width font-weight-bold text-danger text-bold-700'>£54,059.00</div>
+        </div>
+        <div class="text-danger text-danger ml-4 mt-2 text-center top-bottom-3">
+            <b>
+                11,828.00
+            </b>
+            <p>
+                UNITS
+            </p>
+        </div>
+
+        <div class='label top-right-4'>
+            <div class='content name-width font-weight-bold'>BROWNIES</div>
+        </div>
+        <div class='label top-left-4'>
+            <div class='content price-width font-weight-bold text-danger text-bold-700'>£9,518.00</div>
+        </div>
+        <div class="text-danger text-danger ml-4 mt-2 text-center top-bottom-4">
+            <b>
+                2,154.00
+            </b>
+            <p>
+                SLICES
+            </p>
+        </div>
+
+        <div class='label top-right-5'>
+            <div class='content name-width font-weight-bold' style="width: 140px">CHURROS</div>
+        </div>
+        <div class='label top-left-5'>
+            <div class='content price-width font-weight-bold text-danger text-bold-700'>£14,372.50</div>
+        </div>
+        <div class="text-danger text-danger ml-4 mt-2 text-center top-bottom-5">
+            <b>
+                2,245.00
+            </b>
+            <p>
+                UNITS
+            </p>
+        </div>
+
+        <div class='label top-right-6'>
+            <div class='content name-width font-weight-bold'>SHAKES</div>
+        </div>
+        <div class='label top-left-6'>
+            <div class='content price-width font-weight-bold text-danger text-bold-700'>£21,406.00</div>
+        </div>
+        <div class="text-danger text-danger ml-4 mt-2 text-center top-bottom-6">
+            <b>
+                3,855.00
+            </b>
+            <p>
+                UNITS
+            </p>
+        </div>
+
+        <div class='label top-right-7'>
+            <div class='content name-width font-weight-bold' style="width: 141px" >GELATOS</div>
+        </div>
+        <div class='label top-left-7'>
+            <div class='content price-width font-weight-bold text-danger text-bold-700'>£13,471.55</div>
+        </div>
+        <div class="text-danger text-danger ml-4 mt-2 text-center top-bottom-7">
+            <b>
+                5,769.00
+            </b>
+            <p>
+                UNITS
+            </p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="section" style="background-image: url('/assets/banner-mug.png');">
+<div class="container-fluid px-auto text-white">
+    <h2 class="text-bold-700 text-center text-white p-5">Our Concept of Franchising</h2>
+    <!--<p class="px-0 px-md-5 text-center">
+        
+    </p>-->
+    <div class="row justify-content-center align-items-center py-5 px-0 px-md-5 text-center">
+        <div class="col-md-4">
+            <h2>Virtual Kitchen</h2>
+            <p style="text-align: justify; color: #dfdfdf;">Our virtual concept is designed to give extra income by simply adding a few machines to an existing kitchen or can start afresh from a unit.
+            It is very clear, concise, simple and effective way of increasing sales.<span id="dots">..</span><span id="more"><br><br><strong style="margin-bottom: 5px">How it Works:</strong><br>The concept can be simplified when you look at where the names come from. They are dark or ghost in the sense that they operate out of sight and cloud or virtual because they use online ordering tech to connect with customers. Virtual kitchens have the same operational processes in common: orders come in, food is prepared, and packaged meals go out to the customer.<br><br><strong>What You Need:</strong><br><br><strong>Costing:</strong></strong></span></p>
+            <div class="d-flex justify-content-center">
+                <button onclick="myFunctionvk()" id="myBtn" type="button" class="btn btn-danger btn-lg border-radius-0 subscribe-btn mt-3 shadow radius-none d-flex justify-content-center">Read More</button>
+            </div>
+        </div>
+        <div class="col-md-4 mt-5 mt-md-0">
+            <h2>Shop/Restaurant</h2>
+            <p /*class="px-md-5"*/  style="text-align: justify; color: #dfdfdf;">
+                Opening your own business is dream for some and this can be achieved with the help of sweet spot. This concept is is based on having you own shop designed by us in your very own city. Whether its a small or large place sweet spot can accommodate too.<span id="dots1">..</span><span id="more1"><br><br><strong style="margin-bottom: 5px">How it Works:</strong><br>The concept can be simplified when you look at where the names come from. They are dark or ghost in the sense that they operate out of sight and cloud or virtual because they use online ordering tech to connect with customers. Virtual kitchens have the same operational processes in common: orders come in, food is prepared, and packaged meals go out to the customer.<br><br><strong>What You Need:</strong><br><br><strong>Costing:</strong></strong></span></p>
+            </p>
+            <div class="d-flex justify-content-center">
+                <button onclick="myFunctionsr()" id="myBtn1"  type="button" class="btn btn-danger btn-lg border-radius-0 subscribe-btn mt-3 shadow radius-none d-flex justify-content-center">Read More</button>
+            </div>
+        </div>
+        <div class="col-md-4 mt-5 mt-md-0">
+            <h2>KIOSK</h2>
+            <p /*class="px-md-5"*/  style="text-align: justify; color: #dfdfdf;">
+                Our KIOSK concept is designed to give you more options to owning your business in many different formats.<br> 
+                1: Standalone KIOSK for example in a shopping centre<br>
+                2: On the shop floor in an existing restaurant<span id="dots2">..</span><span id="more2"><br><br><strong style="margin-bottom: 5px">How it Works:</strong><br>Kiosks help out businesses to market their brands by offering observability of shopfront to the business owners. You may find it in malls, parking lots, stations, and many more places. It does offer a specific space to sell goods and services. However, the requirement of any kind of business is that they need market for their products, what does market of products mean? It means that it is necessary for your product to be marketed for good sale and increased amount of customers. You only need to have a know-how of marketing strategies to help run your particular business.<br><br><strong>What You Need:</strong><br><br><strong>Costing:</strong></strong></span></p>
+            </p>
+            <div class="d-flex justify-content-center">
+                <button onclick="myFunctionkiosk()" id="myBtn2"  type="button" class="btn btn-danger btn-lg border-radius-0 subscribe-btn mt-3 shadow radius-none d-flex justify-content-center">Read More</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<section id="dg-container" class="dg-container section">
+    <div class="text-wrapper px-5 pt-5">
+        <h2 class="text-bold-700 bg-header">Our Stores</h2>
+        <p class="px-0 px-md-5">
+            We usually ask the interested ones to visit any of our store whichever is convinient to them to get an idea of taste of our products and to explore the enviornment we are offering our customers. Here we are presenting few of our stores located in different locations.
+        </p>
+    </div>
+        <div class="dg-wrapper my-5">
+        <a href="#"><img src="https://sweetspotdesserts.uk/assets/images/store1.jpg" alt="image01"><div></div></a>
+        <a href="#"><img src="https://sweetspotdesserts.uk/assets/images/store2.jpg" alt="image02"><div></div></a>
+        <a href="#"><img src="https://sweetspotdesserts.uk/assets/images/store3.jpg" alt="image03"><div></div></a>
+        <a href="#"><img src="https://sweetspotdesserts.uk/assets/images/store4.jpg" alt="image04"><div></div></a>
+    </div>
+        <nav>
+        <span class="dg-prev p-2">&lt;</span>
+        <span class="dg-next p-2">&gt;</span>
+    </nav>
+</section>
+<div class="section pb-0">
+    <div class="container-fluid bg-danger">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5 py-5">
+                <form action="/franchises/email" method="POST" class=" bg-danger-plus p-5">
+                <input type="hidden" name="_token" value="KQUbww9XOmYQ3QMokXjpqpNAqXxgvL2Ni5oVX6gP">                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" id="form6Example1" placeholder="First Name" name="first_name" required class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" id="form6Example2" class="form-control" name="last_name" required placeholder="Last name" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" id="form6Example3" class="form-control" name="email" required placeholder="Email" />
+                    </div>
+
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form6Example4" class="form-control" name="address" required placeholder="Address" />
+                    </div>
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form6Example5" class="form-control" name="investment_capability" required placeholder="Investment Capability" />
+                    </div>
+
+                    <!-- Number input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form6Example6" class="form-control" name="location" required placeholder="where do you plan on opening store" />
+                    </div>
+
+                    <!-- Message input -->
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control" id="form6Example7" name="query" rows="4" required  placeholder="query"></textarea>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-custom btn-lg border-radius-0 subscribe-btn mt-3 shadow radius-none d-flex justify-content-center">Apply</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-7">
+                <iframe width="100%" style="height: 40rem"
+                        src="https://www.youtube.com/embed/Oz5vmH4SYyk">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row mx-0 mt-3" id="cakes-footer">
+    <div class="col-2 px-0"><img src="/assets/images/ice1.jpg" alt="" width="100%"></div>
+    <div class="col-2 px-0"><img src="/assets/images/ice2.jpg" alt="" width="100%"></div>
+    <div class="col-2 px-0"><img src="/assets/images/ice3.jpg" alt="" width="100%"></div>
+    <div class="col-2 px-0"><img src="/assets/images/ice4.jpg" alt="" width="100%"></div>
+    <div class="col-2 px-0"><img src="/assets/images/ice5.jpg" alt="" width="100%"></div>
+    <div class="col-2 px-0"><img src="/assets/images/ice6.jpg" alt="" width="100%"></div>
+</div>
+    <div class="modal fade text-left" data-backdrop="static" id="modal_sm" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+<div class="modal fade text-left" data-backdrop="static" id="modal_md" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+<div class="modal fade text-left" data-backdrop="static" id="modal_lg" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+<div class="modal fade text-left" data-backdrop="static" id="modal_xl" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+        <footer class="bg-footer pt-3">
+    <div class="container pt-4">
+        <div class="row text-white justify-content-between">
+            <div class="col-md-5 col-12 px-md-5">
+                <p class="text-center text-md-left text-white"><b>Get weekly updates, Subscribe to our newsletter.</b></p>
+                <form action="/subscribers" method="POST">
+                    <input type="hidden" name="_token" value="KQUbww9XOmYQ3QMokXjpqpNAqXxgvL2Ni5oVX6gP">                    <div class="row align-items-center">
+                        <div class="col-md-8 pr-md-0">
+                            <input class="form-control subscribe-fields-shadow" name="email" type="email" placeholder="Email Address">
+                        </div>
+                        <div class="col-md-4 mt-3 mt-md-0">
+                            <button type="submit" class="btn  btn-danger btn-lg btn-block border-radius-0 subscribe-btn p-0">
+                                <i class="d-lg-none d-md-block d-none fa fa-bell"></i>
+                                <span class="d-lg-block d-md-none d-block">Subscribe</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <p class="text-center text-md-left text-white mt-3">
+                    No Charge. Unsubscribe anytime
+                </p>
+            </div>
+            <div class="col-md-3">
+                <p><b>Our Policies</b></p>
+                <ul class="list-unstyled row">
+                    <li class="col-md-12 col-6"> <a class="text-light" href="/terms_of_use">Terms of Use</a></li>
+                    <li class="col-md-12 col-6"><a class="text-light" href="/privacy-policy">Privacy Policy</a></li>
+                    <li class="col-md-12 col-6"><a class="text-light" href="/terms_conditions">Terms & Conditions</a></li>
+                    <li class="col-md-12 col-6"> <a class="text-light" href="/allergy_information">Allergy Information	</a></li>
+                    <li class="col-md-12 col-6"> <a class="text-light" href="#">Unsubscribe</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <p class="mb-0"><b>Download</b></p>
+                <div class="row">
+                    <a href="" class="col-md-12 col-6">
+                        <img src="https://sweetspotdesserts.uk/assets/images/app-store2.png" alt="" width="80%">
+                    </a>
+                    <a href="" class="col-md-12 col-6">
+                        <img src="https://sweetspotdesserts.uk/assets/images/googleplaystore.png" alt="" width="80%">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <p>Powered By</p>
+                <div class="row">
+                    <img class="col-md-12 col-6" src="/assets/images/poweredSS.png" alt="" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="bg-danger text-white">
+    <div class="container">
+        <div class="row align-items-center justify-content-md-between justify-content-center">
+            <div class="col-md-auto col-12 order-md-1 order-2 text-center">
+                <p class="mb-0">
+                    <span class="mr-2">©</span> All Rights Reserved. Developed by SweetSpot.
+                </p>
+            </div>
+            <div class="col-auto order-md-2 order-1">
+                <img src="/assets/images/visa.png" alt="" width="50px" height="auto">
+                <img src="/assets/images/mastercard1.png" alt="" width="50px" height="auto">
+                <img src="/assets/images/paypal.png" alt="" width="50px" height="auto">
+            </div>
+        </div>
+    </div>
+</div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="//cdnotif.b-cdn.net/js/gfs.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    feather.replace()
+</script>
+<script>
+    if(document.getElementById('cart_items'))
+        document.getElementById('cart_items').addEventListener('click',displayCart);
+    function displayCart() {
+        let page_url = window.location.pathname.substr(1);
+        if (page_url.substr(0,7) === 'receipt'){
+            window.scrollTo(0,500);
+            return;
+        }
+        if (document.getElementById('cart').classList.contains('show')) {
+            document.getElementById('cart').classList.remove('show');
+            return;
+        }else
+            document.getElementById('cart').classList.add('show');
+        let cart = localStorage.getItem('cart');
+        let div = '';
+        let div_cart = document.getElementById('cart');
+        if (cart && document.getElementById('cart').classList.contains('show')){
+            cart = JSON.parse(cart);
+            if (div_cart.innerHTML) return;
+            div_cart.innerHTML = '';
+            if (Object.keys(cart).length){
+                for (let i in cart){
+                    if (i !== 'delivery_fee' && i !== 'discount' && i !== 'subtotal' && i !== 'total'){
+                        let item = JSON.parse(cart[i]);
+                        let addons = item['addons'];
+                        div += "<a class=dropdown-items> <span><img src="+'/images/items/'+item['image']['filename']+" width='50px' height='50px'> </span> "+item['quantity']+"x "+((item['name'].length > 25)? item['name'].substr(0,24)+'....':item['name'])+"</a>";
+                        div += "<div class='dropdown-divider'></div>";
+                    }
+                }
+                div += "<a onclick='viewCart()' class='cursor-pointer dropdown-item d-flex justify-content-center' > <i class='icon-shopping-cart mr-2'></i> View Details </a>";
+                div_cart.innerHTML = div;
+            }
+        }else{
+            div = "<a class=dropdown-items> Your Cart is Empty </a>"
+            div += "<div class='dropdown-divider'></div><a onclick='viewCart()'  class='cursor-pointer dropdown-item d-flex justify-content-center' > Add Items  </a>"
+            div_cart.innerHTML = div;
+            let dropdown = document.getElementById('item-dropdown');
+            dropdown.style.left = 0;
+            dropdown.style.right = '9rem';
+        }
+    }
+    function viewCart() {
+        let page_url = window.location.pathname.substr(1);
+        if (page_url === 'menu' || page_url.substr(0,8) === 'checkout' || page_url.substr(0,7) === 'receipt'){
+            window.scrollTo(0,500);
+        }else
+            window.location.href = '/menu';
+    }
+</script>
+<script>
+    $(window).on('load', function () {
+        if (window.location.pathname !== '/menu')
+            setTimeout(()=>{
+                $('#overlay').hide();
+            },500);
+    })
+</script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnotif.b-cdn.net/js/mf.min.js"></script>
+    <script type="text/javascript" src="js/modernizr.custom.53451.js"></script>
+    <script type="text/javascript" src="js/jquery.gallery.js"></script>
+    <script type="text/javascript">
+        
+        function myFunctionvk() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+            var btnText = document.getElementById("myBtn");
+            
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read More"; 
+                moreText.style.display = "none";
+            } 
+            else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Less"; 
+            moreText.style.display = "inline";
+            }
+            
+        }
+        
+        function myFunctionsr() {
+            var dots = document.getElementById("dots1");
+            var moreText = document.getElementById("more1");
+            var btnText = document.getElementById("myBtn1");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read More"; 
+                moreText.style.display = "none";
+            } 
+            else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Less"; 
+            moreText.style.display = "inline";
+            }
+        }
+        
+        function myFunctionkiosk() {
+            var dots = document.getElementById("dots2");
+            var moreText = document.getElementById("more2");
+            var btnText = document.getElementById("myBtn2");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read More"; 
+                moreText.style.display = "none";
+            } 
+            else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Less"; 
+            moreText.style.display = "inline";
+            }
+        }
+        
+        function myFunctionWhy() {
+            var dots = document.getElementById("dotsWhy");
+            var moreText = document.getElementById("moreWhy");
+            var btnText = document.getElementById("myBtnWhy");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Read More"; 
+                moreText.style.display = "none";
+            } 
+            else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Less"; 
+            moreText.style.display = "inline";
+            }
+        }
+        
+        $(function() {
+            $('#dg-container').gallery();
+        });
+    </script/>
+    <script>
+        $("#button-right").click(function () {
+            $(".slider")
+                .children()
+                .addClass("left")
+                .removeClass("right")
+                .first()
+                .appendTo(".slider");
+        });
+
+        $("#button-left").click(function () {
+            $(".slider")
+                .children()
+                .addClass("right")
+                .removeClass("left")
+                .last()
+                .prependTo(".slider");
+        });
+        
+    </script>
+    </body>
+</html>
