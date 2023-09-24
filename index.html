@@ -553,6 +553,50 @@ We are now also taking booking for birthdays, work dos and anniversaries. Contac
 
     <!-- testimonial section ends -->
 
+<style>
+
+.loading-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right:0;
+  bottom:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #ffffff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}</style>
+
+<!-- Add this div for the loading animation -->
+<div id="loadingAnimation" class="loading-container">
+  <div class="loading-spinner"></div>
+</div>
+
     <!-- order a cake section starts -->
 
     <section class="ftco-section img" id="order" style="background-image: url(https://i.ibb.co/S66GHc9/order-bg.jpg); background-position:center; background-size:cover;"
@@ -564,36 +608,36 @@ We are now also taking booking for birthdays, work dos and anniversaries. Contac
                         <span class="subheading">Order</span>
                         <h2 class="mb-4">Your Favourites</h2>
                     </div>
-                    <form action="#">
+                    <form id="newOrderForm">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Name</label>
-                                    <input type="text" class="form-control" placeholder="John Doe">
+                                    <input type="text" class="form-control" placeholder="John Doe" id="name">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Email</label>
-                                    <input type="email" class="form-control" placeholder="johndoe@gmail.com">
+                                    <input type="email" class="form-control" placeholder="johndoe@gmail.com" id="email">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Address</label>
-                                    <input type="text" class="form-control" placeholder="XYZ">
+                                    <input type="text" class="form-control" placeholder="XYZ" id="address">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Phone</label>
-                                    <input type="text" class="form-control" placeholder="9874563215">
+                                    <input type="text" class="form-control" placeholder="9874563215" id="phone">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Date</label>
-                                    <input type="text" class="form-control" id="book_date" placeholder="Date">
+                                    <input type="text" class="form-control" id="book_date" placeholder="Date" >
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -603,6 +647,38 @@ We are now also taking booking for birthdays, work dos and anniversaries. Contac
                                 </div>
                             </div>
                             
+							
+							
+							
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="item_name">Item Name</label>
+									<select class="form-control" id="itemName" name="item_name">
+									<option>--select--</option>
+									<option value="Waffles">Waffles</option>
+									<option value="Cookie Doughs">Cookie Doughs</option>
+									<option value="Brownies">Brownies</option>
+									<option value="Cheesecakes">Cheesecakes</option>
+									<option value="Shakes">Shakes</option>
+									<option value="Hot Drinks">Hot Drinks</option>
+									<option value="Sundaes">Sundaes</option>
+									<option value="Cold Drinks">Cold Drinks</option>
+									<option value="Sweets">Sweets</option>
+									<option value="Gelato Ice Creams">Gelato Ice Creams</option>
+									</select>
+								</div>
+							</div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Item Quantity</label>
+                                    <input type="number" class="form-control" id="itemQuantity" placeholder="Number">
+                                </div>
+                            </div>
+                            
+							
+							
+							
                             <div class="col-md-12 mt-3">
                                 <div class="form-group text-center">
                                     <input type="submit" value="Order" class="btn btn-primary py-3 px-5">
@@ -614,6 +690,75 @@ We are now also taking booking for birthdays, work dos and anniversaries. Contac
             </div>
         </div>
     </section>
+	
+	
+	
+<script>
+
+var userName = document.getElementById("name");
+var userAddress = document.getElementById("address");
+var userEmail = document.getElementById("email");
+var userPhone = document.getElementById("phone");
+var userDate = document.getElementById("book_date");
+var userTime = document.getElementById("book_time");
+var userSelectedItem = document.getElementById("itemName");
+var userSelectedQuantity = document.getElementById("itemQuantity");
+
+
+
+var orderFormSubmit = document.getElementById("newOrderForm");
+
+var loadingAnimation = document.getElementById("loadingAnimation");
+const body = document.querySelector("body");
+ 
+ 
+orderFormSubmit.addEventListener("submit", function(event) {
+  event.preventDefault(); 
+  
+  if (userName === "" || userAddress === "" || userEmail === "" || userPhone === "" || userDate.value === "" || userTime.value === "" || userSelectedItem.value === "" || userSelectedQuantity.value === "") {
+    alert("Please fill in all fields.");
+    return;
+  }
+loadingAnimation.style.display = "block";
+
+  var formData = {
+    userName: userName.value,
+	address: userAddress.value,
+	userEmail: userEmail.value,
+	phone: userPhone.value,
+	date: userDate.value,
+    time: userTime.value,
+    itemName: userSelectedItem.value,
+    itemQuantity: userSelectedQuantity.value ,
+  };
+
+  fetch("https://bewildered-tan-tux.cyclic.cloud/submit-order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(function(response) {
+    if (response.ok) {
+      alert("Order submitted successfully.");
+	  loadingAnimation.style.display = "none";
+	  location.reload();
+	  
+    } else {
+      console.log("Error submitting order.");
+	  loadingAnimation.style.display = "none";
+    }
+  })
+  .catch(function(error) {
+    console.log("Error submitting order.");
+	loadingAnimation.style.display = "none";
+    console.error(error);
+  });
+});
+
+</script>
+
     <!-- order a cake section ends -->
 
     <!-- footer section starts -->
